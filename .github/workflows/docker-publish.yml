@@ -41,6 +41,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           # 打上两个标签：一个是具体的版本号(v1.0.0)，另一个是 latest
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/randompicapi:${{ github.event.release.tag_name }}
