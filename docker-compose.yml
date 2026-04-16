@@ -1,0 +1,9 @@
+services:
+  image-api:
+    build: .
+    container_name: image-api
+    restart: unless-stopped
+    ports:
+      - "8234:8000"
+    volumes:
+      - ./images:/app/images
