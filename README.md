@@ -59,4 +59,19 @@ images/
 只需拉取代码，把图片放进 `images` 文件夹，然后在项目根目录执行：
 
 ```bash
-docker compose up -d --build
+services:
+  image-api:
+    image: yuwancumian2009/randompicapi:latest
+    container_name: image-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./images:/app/images
+```
+
+## 注意事项：
+
+支持的图片格式为：.jpg, .jpeg, .png, .gif, .webp。
+
+建议文件夹名称使用英文或数字，避免在部分不支持中文 URL 编码的客户端中请求失败。保留关键字 pc, mobile, random 不可用作文件夹名。
