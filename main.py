@@ -70,8 +70,15 @@ def fetch_image(cat=None, orient=None):
     
     if not filtered:
         raise HTTPException(status_code=404, detail="未找到图片")
-    return FileResponse(random.choice(filtered)["path"])
-
+        
+    # 👇 核心修改：添加强制禁用缓存的 HTTP 响应头
+    headers = {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
+    }
+    
+    return FileResponse(random.choice(filtered)["path"], headers=headers)
 @app.get("/api/random")
 def get_any():
     return fetch_image()
